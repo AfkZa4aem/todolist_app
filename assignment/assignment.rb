@@ -8,27 +8,21 @@ class Assignment
   #
   def create_user(params)
     @user = User.create(username: params[:username], password_digest: params[:password_digest])
-    return @user
   end
 
   def create_todolist(params)
     @list = TodoList.create(list_name: params[:name], list_due_date: params[:due_date])
-    return @list
   end
 
   #
   # Retrieve paginated results from DB
   #
   def find_allusers(offset, limit)
-      # accept offset and limit input parameters
-      # use the User Model class to find all Users, ordered by `updated_at` ascending, with specified row offset and row limit
-      # return a collection of User instances that represent the specified rows
+    @find = User.all.offset(offset).limit(limit).order(updated_at: :asc)
   end
 
   def find_alllists(offset, limit)
-      # accept offset and limit input parameters
-      # use the TodoList Model class to find all TodoLists, ordered by `list_due_date` descending, with specified row offset and row limit
-      # return a collection of TodoList instances that represent the specified rows
+     @find = TodoList.all.offset(offset).limit(limit).order(list_due_date: :desc)
   end
 
   #
